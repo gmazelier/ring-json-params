@@ -34,3 +34,11 @@
         resp (json-echo req)]
     (is (= {"id" 3 "foo" "bar"} (:params resp)))
     (is (= {"foo" "bar"} (:json-params resp)))))
+
+(deftest augments-without-overriding-existing-params
+  (let [req {:content-type "application/json; charset=UTF-8"
+             :body (stream "{\"foo\": \"bar\", \"key\": \"another\"}")
+             :params {"id" 3 "key" "value"}}
+        resp (json-echo req)]
+    (is (= {"id" 3 "foo" "bar" "key" "value"} (:params resp)))
+    (is (= {"foo" "bar" "key" "another"} (:json-params resp)))))

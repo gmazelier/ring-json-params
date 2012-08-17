@@ -13,6 +13,6 @@
             json-params (json/parse-string bstr)
             req* (assoc req
                    :json-params json-params
-                   :params (merge (:params req) json-params))]
+                   :params (merge json-params (:params req)))]
         (handler req*))
       (handler req))))
