@@ -11,8 +11,9 @@
     (if-let [body (and (json-request? req) (:body req))]
       (let [bstr (slurp body)
             json-params (json/parse-string bstr)
+            params (if (vector? json-params) {:json-array json-params} json-params)
             req* (assoc req
                    :json-params json-params
-                   :params (merge json-params (:params req)))]
+                   :params (merge params (:params req)))]
         (handler req*))
       (handler req))))

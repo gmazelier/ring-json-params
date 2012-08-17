@@ -42,3 +42,12 @@
         resp (json-echo req)]
     (is (= {"id" 3 "foo" "bar" "key" "value"} (:params resp)))
     (is (= {"foo" "bar" "key" "another"} (:json-params resp)))))
+
+(deftest augments-with-json-array
+  (let [req {:content-type "application/json; charset=UTF-8"
+             :body (stream "[{\"foo\": \"bar\"}, {\"foo\": \"baz\"}]")
+             :params {"id" 3}}
+        resp (json-echo req)]
+    (is (contains? (:params resp) :json-array))
+    (is (= {"id" 3 :json-array [{"foo" "bar"} {"foo" "baz"}]} (:params resp)))
+    (is (= [{"foo" "bar"} {"foo" "baz"}] (:json-params resp)))))
