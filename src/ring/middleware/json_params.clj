@@ -10,7 +10,7 @@
   (fn [req]
     (if-let [body (and (json-request? req) (:body req))]
       (let [bstr (slurp body)
-            json-params (json/parse-string bstr)
+            json-params (json/parse-string bstr true)
             params (if (vector? json-params) {:json-array json-params} json-params)
             req* (assoc req
                    :json-params json-params
