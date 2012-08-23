@@ -14,12 +14,12 @@
 
 With Leiningen:
 
-    [org.clojars.gmazelier/ring-json-params "0.1.4-SNAPSHOT"]
+    [org.clojars.gmazelier/ring-json-params "0.1.4"]
 
 With Maven:
 
     <dependency>
       <groupId>org.clojars.gmazelier</groupId>
       <artifactId>ring-json-params</artifactId>
-      <version>0.1.4-SNAPSHOT</version>
+      <version>0.1.4</version>
     </dependency>
